@@ -88,7 +88,7 @@ After this, all that is needed is some simple logic to handle the format.
 
 DIS data format
 ===============
-The messages appear to be a fixed 18 bytes, where the first and last bytes are a header/footer and can be discarded. There appear to be two checksum bytes at the end that I haven't figured out yet.
+The messages appear to be a fixed 18 bytes, where the first is a header and can be discarded. There appear to be two checksum bytes at the end that I haven't figured out yet. Many captured messages are in [captured-dis-messages.txt](https://raw.github.com/derpston/Audi-radio-DIS-reader/master/captured-dis-messages.txt) and your suggestions for how to calculate this checksum would be appreciated.
 
 An example capture produces something like this:
 
