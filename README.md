@@ -88,32 +88,37 @@ After this, all that is needed is some simple logic to handle the format.
 
 DIS data format
 ===============
-The messages appear to be a fixed 18 bytes, where the first is a header and can be discarded. There appear to be two checksum bytes at the end that I haven't figured out yet. Many captured messages are in [captured-dis-messages.txt](https://raw.github.com/derpston/Audi-radio-DIS-reader/master/captured-dis-messages.txt) and your suggestions for how to calculate this checksum would be appreciated.
+The messages appear to be a fixed 18 bytes, where the first is a header and can be discarded. The last byte is a checksum. The second to last byte appears to be an unprintable command byte. Many captured messages are in [captured-dis-messages.txt](https://raw.github.com/derpston/Audi-radio-DIS-reader/master/captured-dis-messages.txt)
 
 An example capture produces something like this:
 
 ```
-1111 0000 '\xf0'
-0010 0000 ' '
-0010 0000 ' '
-0011 0001 '1'
-0011 0000 '0'
-0011 0010 '2'
-0010 1110 '.'
-0011 0000 '0'
-0010 0000 ' '
-0100 0110 'F'
-0100 1101 'M'
-0011 0001 '1'
-0010 1101 '-'
-0011 0011 '3'
-0010 0000 ' '
-0010 0000 ' '
-0001 1100 '\x1c'
-0101 1110 '^'
+1111 0000 '\xf0'  # header
+0010 0000 ' '     # payload
+0010 0000 ' '     # .
+0011 0001 '1'     # .
+0011 0000 '0'     # .
+0011 0010 '2'     # .
+0010 1110 '.'     # .
+0011 0000 '0'     # .
+0010 0000 ' '     # payload
+0100 0110 'F'     # .
+0100 1101 'M'     # .
+0011 0001 '1'     # .
+0010 1101 '-'     # .
+0011 0011 '3'     # .
+0010 0000 ' '     # .
+0010 0000 ' '     # payload
+0001 1100 '\x1c'  # command byte?
+0101 1110 '^'     # checksum
 ```
 
 Which corresponds to a DIS display of: "  102.0 FM1-3  "
+
+Checksum
+========
+
+The checksum is calculated as the bitwise inversion of the least significant byte of the sum of all bytes in the message, including the header but excluding the checksum.
 
 Dependencies
 ============
@@ -131,10 +136,15 @@ Once you have the dependencies installed, try running it and pressing some prese
 
 ```
 ~$ python dis-reader.py
-Waiting for DIS radio messages. (possible pyaudio error messages are expected)
+Waiting for DIS radio messages.
+(possible pyaudio/alsa/pulse/jack/etc warnings are expected)
 [...audio system warnings snipped...]
-   89.6 FM1-4  
-   89.6 FM1    
+'  103.8 FM1    \x1c' (checksum valid)
+'SPIN1038FM1    \x1c' (checksum valid)
+'  107.2 FM1-4  \x1c' (checksum valid)
+'   89.1 FM1-6  \x1c' (checksum valid)
+'RTE R1 \x1cFM1-6  \x1c' (checksum valid)
+[...]
 ```
 
 Troubleshooting
@@ -152,5 +162,5 @@ Attribution
 For helping me figure this out, thanks to:
 
 * Jeff (Oscilloscope and help with initial investigation)
-* Becky ("Read on the rising clock edge!" and format investigation)
+* Becky ("Read on the rising clock edge!", format investigation and solving the checksum question)
 
