@@ -163,4 +163,4 @@ For helping me figure this out, thanks to:
 
 * Jeff (Oscilloscope and help with initial investigation)
 * Becky ("Read on the rising clock edge!", format investigation and solving the checksum question)
-
+* nemo (Hint about the second to last byte possibly being a command byte)
