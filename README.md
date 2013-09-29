@@ -143,6 +143,14 @@ Troubleshooting
 The first troubleshooting step should be to open a sound recording application like Audacity and record a sample. You should see spikes when the radio sends DIS data. Try zooming in on them to look at the quality of the waveforms. You should get something similar to the DIS clock/data signal screenshot above.
 
 Contributing
-========
+============
 Contributions welcome!
+
+Attribution
+===========
+
+For helping me figure this out, thanks to:
+
+* Jeff (Oscilloscope and help with initial investigation)
+* Becky ("Read on the rising clock edge!" and format investigation)
 
