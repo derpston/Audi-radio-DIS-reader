@@ -31,9 +31,9 @@ def decode(bitstream):
     # Verifying the checksum involves taking the sum of all bytes
     # including the header and comparing the inverted least significant
     # byte against the transmitted checksum.
-    checksum_validity= ((checksum & 0xff) ^ 0xff) == transmitted_checksum
+    checksum_valid = ((checksum & 0xff) ^ 0xff) == transmitted_checksum
         
-    return (checksum_validity, message)
+    return (checksum_valid, message)
 
 def getDISMessages(binary_one_threshold = 20000):
     """A generator that attempts to read Audi radio DIS messages from
