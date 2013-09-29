@@ -25,7 +25,7 @@ The radio uses three pins and a simple format to send this data to the DIS. The 
 
 These pins produce digital signals at 5V.
 
-For the purpose of reading the DIS data sent by the radio, we can ignore pin 10, the DIS enable signal.
+For the purpose of reading the DIS data sent by the radio, we can ignore pin 10, the DIS enable signal. This sends a high signal during transmission of DIS messages, and is low at all other times.
 
 The radio was removed from the car and powered from a 12V supply in a lab environment. On the lower 8-pin connector ("III") use pin 8 for GND and 7 for +12V.
 
