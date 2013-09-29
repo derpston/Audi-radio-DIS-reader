@@ -54,7 +54,7 @@ The protocol is relatively simple. Each time the clock signal shows a rising edg
 
 ![Decoding DIS data](https://raw.github.com/derpston/Audi-radio-DIS-reader/master/img/dis-data-decoded.jpg "Decoding DIS data")
 
-Woring with PyAudio to read this data is relatively simple.
+Working with PyAudio to read this data is relatively simple.
 
 Configure reading from the microphone port:
 
